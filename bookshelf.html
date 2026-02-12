@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | Bookshelf</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&family=Noto+Sans:wght@400;500;600&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-orange: #6366f1;
+            --accent-blue: #06b6d4;
+            --dark-blue: #0f172a;
+            --success-green: #10b981;
+            --draft-gray: #64748b;
+            --premium-bg: #f8fafc;
+            --premium-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        body {
+            font-family: 'Amazon Ember', 'Outfit', Arial, sans-serif;
+            background-color: var(--premium-bg);
+            color: #0F1111;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Top Nav Secondary */
+        .bookshelf-nav-secondary {
+            background-color: #fff;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.25rem;
+            font-size: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .bookshelf-nav-secondary a,
+        .bookshelf-nav-secondary button {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .bookshelf-nav-secondary a:hover {
+            color: #C7511F;
+            text-decoration: underline;
+        }
+
+        /* Header */
+        .bookshelf-header {
+            background-color: #fff;
+            padding: 1rem 0;
+            border-bottom: 1px solid #d5d9d9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .brand-name-orange {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            line-height: 1;
+        }
+
+        .brand-divider {
+            height: 35px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 1rem;
+        }
+
+        .brand-subtext-stack span {
+            font-size: 1.2rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .main-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .main-nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .main-nav-links a.active {
+            color: var(--primary-orange);
+            border-bottom-color: var(--primary-orange);
+        }
+
+        .main-nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* Hero / Quick Stats Section */
+        .dashboard-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 3rem 1rem;
+            margin-bottom: -2rem;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.25rem;
+            margin: 0 0 0.5rem;
+            font-weight: 400;
+        }
+
+        .quick-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 100px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+            color: var(--primary-orange);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* Bookshelf Layout */
+        .bookshelf-layout {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
+        }
+
+        .main-list {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn-create-floating {
+            background: linear-gradient(to bottom, #F7DF61, #EFC100);
+            border: 1px solid #a88734;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .btn-create-floating:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Book Card Premium */
+        .book-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .book-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .book-cover {
+            width: 120px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-info {
+            flex-grow: 1;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .status-live {
+            background-color: #e7f4e7;
+            color: var(--success-green);
+        }
+
+        .status-draft {
+            background-color: #f3f3f3;
+            color: var(--draft-gray);
+        }
+
+        .book-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 0.25rem;
+        }
+
+        .book-author {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0 0 1rem;
+        }
+
+        .book-metrics {
+            display: flex;
+            gap: 2rem;
+            background: #fcfcfc;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-label {
+            font-size: 0.65rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .book-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            background: #fff;
+            color: var(--accent-blue);
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-action:hover {
+            background: #f7fafa;
+        }
+
+        .btn-action.primary {
+            background: #f0f2f2;
+            border-color: #adb1b8;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .widget {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .widget-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .activity-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 0.8rem;
+        }
+
+        .activity-date {
+            display: block;
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #c33;
+            color: #fff;
+            font-size: 10px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dark Mode Extensions */
+        .dark body {
+            background-color: #0f1111;
+            color: #e6e6e6;
+        }
+
+        .dark .bookshelf-header,
+        .dark .bookshelf-nav-secondary {
+            background-color: #1A1D1D;
+            border-color: #333;
+        }
+
+        .dark .main-list,
+        .dark .book-card,
+        .dark .widget {
+            background-color: #1A1D1D;
+            border-color: #333;
+        }
+
+        .dark .book-metrics {
+            background-color: #232f3e;
+            border-color: #333;
+        }
+
+        .dark .status-live {
+            background-color: #1a3a1a;
+            color: #4ade80;
+        }
+
+        .dark .status-badge {
+            color: #fff;
+        }
+
+        .dark .btn-action {
+            background-color: #232f3e;
+            border-color: #444;
+            color: #818cf8;
+        }
+
+        .dark .btn-create-floating {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Notification Dropdown */
+        .notif-dropdown {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            width: 280px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 2000;
+        }
+
+        .notif-dropdown.show {
+            display: block;
+        }
+
+        .notif-header {
+            padding: 12px;
+            font-weight: 700;
+            border-bottom: 1px solid #eee;
+            background: #f9f9f9;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .notif-item {
+            padding: 12px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .notif-item:hover {
+            background: #f7fafa;
+        }
+
+        .notif-item span {
+            display: block;
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .dark .notif-dropdown {
+            background: #1A1D1D;
+            border-color: #333;
+            color: #eee;
+        }
+
+        .dark .notif-header {
+            background: #232f3e;
+            border-color: #333;
+        }
+
+        .dark .notif-item {
+            border-color: #333;
+        }
+
+        .dark .notif-item:hover {
+            background: #232f3e;
+        }
+
+        /* Language Dropdown */
+        #language-dropdown.show {
+            display: block !important;
+        }
+
+        .language-selector .notif-item:hover {
+            background: #f0f0f0;
+        }
+
+        .dark .language-selector .notif-item:hover {
+            background: #232f3e;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .bookshelf-nav-secondary {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem;
+                font-size: 0.7rem;
+            }
+
+            .main-nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-inner {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .quick-stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .bookshelf-layout {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            .book-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .book-cover {
+                width: 100%;
+                max-width: 180px;
+                margin: 0 auto;
+            }
+
+            .book-actions {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .btn-action {
+                flex: 1 1 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-name-orange {
+                font-size: 1.4rem;
+            }
+
+            .brand-subtext-stack span {
+                font-size: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 1.75rem;
+            }
+
+            .stat-card {
+                min-width: 70px;
+                padding: 0.75rem 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+
+            .book-title {
+                font-size: 1.2rem;
+            }
+
+            .book-metrics {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .metric {
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .notification-bell {
+                position: static;
+            }
+
+            .notif-dropdown {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="bookshelf-nav-secondary">
+        <div class="notification-bell" onclick="toggleNotifications()">
+            <span class="material-icons" style="font-size: 18px;">notifications</span>
+            <span class="badge">3</span>
+            <div id="notif-dropdown" class="notif-dropdown">
+                <div class="notif-header">Notifications</div>
+                <div class="notif-item"><b>New Review:</b> "Your Wish" received 5 stars! <span>2m ago</span></div>
+                <div class="notif-item"><b>System:</b> Metadata update successful. <span>1h ago</span></div>
+                <div class="notif-item"><b>Finance:</b> Jan Royalties processed. <span>5h ago</span></div>
+            </div>
+        </div>
+        <a href="author_profile.html" style="font-weight: 700; color: #6366f1;"><span class="material-icons"
+                style="font-size: 16px;">visibility</span> <span data-i18n="viewPublicProfile">View Public
+                Profile</span></a>
+        <div class="nav-divider-small"></div>
+        <div class="language-selector" style="position: relative;">
+            <button class="bg-transparent border-0 cursor-pointer p-0 text-link" onclick="toggleLanguageDropdown()"
+                style="display: flex; align-items: center; gap: 4px;">
+                <span id="current-language">English</span>
+                <span class="material-icons" style="font-size: 10px;">expand_more</span>
+            </button>
+            <div id="language-dropdown" class="notif-dropdown" style="display: none; min-width: 150px;">
+                <div class="notif-header">Select Language</div>
+                <div class="notif-item" onclick="selectLanguage('en')" style="cursor: pointer;">🇬🇧 English</div>
+                <div class="notif-item" onclick="selectLanguage('es')" style="cursor: pointer;">🇪🇸 Español</div>
+                <div class="notif-item" onclick="selectLanguage('fr')" style="cursor: pointer;">🇫🇷 Français</div>
+                <div class="notif-item" onclick="selectLanguage('de')" style="cursor: pointer;">🇩🇪 Deutsch</div>
+                <div class="notif-item" onclick="selectLanguage('hi')" style="cursor: pointer;">🇮🇳 हिन्दी</div>
+                <div class="notif-item" onclick="selectLanguage('te')" style="cursor: pointer;">🇮🇳 తెలుగు</div>
+            </div>
+        </div>
+        <div class="nav-divider-small"></div>
+        <a href="help_center.html" data-i18n="help">Help</a>
+        <div class="nav-divider-small"></div>
+        <a href="index.html" data-i18n="signOut">Sign out</a>
+    </nav>
+
+    <header class="bookshelf-header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext-stack">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav-links">
+                <a class="active" href="bookshelf.html" data-i18n="bookshelf">Bookshelf</a>
+                <a href="reports.html" data-i18n="reports">Reports</a>
+                <a href="community_forum.html" data-i18n="community">Community</a>
+                <a href="marketing.html" data-i18n="marketing">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard-hero">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <h1 data-i18n="dashboard">Dashboard</h1>
+                    <p style="opacity: 0.8; font-size: 1.1rem;" data-i18n="dashboardSubtitle">Manage your portfolio and
+                        track your publishing progress.</p>
+                </div>
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <span class="stat-value">1</span>
+                        <span class="stat-label" data-i18n="live">Live</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">2</span>
+                        <span class="stat-label" data-i18n="drafts">Drafts</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">$142</span>
+                        <span class="stat-label" data-i18n="royalties">Royalties</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bookshelf-layout">
+            <div class="main-list">
+                <div class="section-header">
+                    <h2 style="margin: 0; font-size: 1.5rem;">Your Titles</h2>
+                    <a href="create_selection.html" class="btn-create-floating">
+                        <span class="material-icons">add_circle</span> Create New
+                    </a>
+                </div>
+
+                <!-- Book Item: Live -->
+                <article class="book-card">
+                    <div class="book-cover">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXRrtK3Fiydi3Ze8KZ8oyxvIq0dV2S3YTpXOISrW-GaPzxg9oq4aS4B0kXL2PMb8qAjT0OOwjVPI44mmVb16cVr5WAagEexp8-PIqzUqmF4iB9gFdmZ72MBJ5rBG_oHjFg-LBURU9KnW-nWvCeFDwHSFo0K8Q7-YWDP2MMyONGH9HeRq7TXiViIoe_rSIBJX8wf4n4QlKHLMKvIUPkl9eCJYzmuyz35POMsjVahk5ZdyDbEekwe5ALTooImhOLEfPBhK5oV6ow36Y"
+                            alt="Your Wish Cover">
+                    </div>
+                    <div class="book-info">
+                        <span class="status-badge status-live">Live</span>
+                        <h3 class="book-title">Your Wish: యోర్ విష్</h3>
+                        <p class="book-author">by Chaithanya Reddy</p>
+
+                        <div class="book-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Marketplace</span>
+                                <span class="metric-value">Global</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Sales (30d)</span>
+                                <span class="metric-value">42</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Rating</span>
+                                <span class="metric-value"
+                                    style="display: flex; align-items: center; gap: 4px; color: #fbbf24;">
+                                    4.8 <span class="material-icons" style="font-size: 14px;">star</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <a href="ebook_details.html" class="btn-action primary">Edit Details</a>
+                        <a href="ebook_pricing.html" class="btn-action">Edit Pricing</a>
+                        <a href="reports.html" class="btn-action">View Sales</a>
+                        <button class="btn-action">Promote</button>
+                    </div>
+                </article>
+
+                <!-- Book Item: Draft -->
+                <article class="book-card">
+                    <div class="book-cover"
+                        style="display: flex; align-items: center; justify-content: center; background: #eee; color: #ccc;">
+                        <span class="material-icons" style="font-size: 48px;">menu_book</span>
+                    </div>
+                    <div class="book-info">
+                        <span class="status-badge status-draft">Draft</span>
+                        <h3 class="book-title">The Digital Frontier</h3>
+                        <p class="book-author">by Chaithanya Reddy</p>
+                        <p style="font-size: 0.8rem; color: #e67e22; font-weight: 600;">Setup Incomplete: Pricing
+                            Required</p>
+                    </div>
+                    <div class="book-actions">
+                        <a href="ebook_details.html" class="btn-action primary">Continue Setup</a>
+                        <button class="btn-action">Delete Draft</button>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">Recent Activity</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            "Your Wish" successfully published in UK Marketplace.
+                            <span class="activity-date">2 hours ago</span>
+                        </li>
+                        <li class="activity-item">
+                            Payment of $42.50 processed for Jan earnings.
+                            <span class="activity-date">Yesterday</span>
+                        </li>
+                        <li class="activity-item">
+                            New review received on "Your Wish" (5 stars).
+                            <span class="activity-date">2 days ago</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="widget"
+                    style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); border: none;">
+                    <h3 class="widget-title" style="color: #fff; border-color: rgba(255,255,255,0.3);">Pro Tip</h3>
+                    <p style="color: #fff; font-size: 0.85rem; line-height: 1.5;">
+                        Optimizing your book categories can increase discoverability by up to 25%. Check the <a
+                            href="marketing.html" style="color: #fff; font-weight: 700;">Marketing tab</a> for insights.
+                    </p>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Quick Links</h3>
+                    <ul class="activity-list" style="font-weight: 600;">
+                        <li><a href="help_center.html" style="color: var(--accent-blue); text-decoration: none;">Help
+                                Center</a></li>
+                        <li><a href="community_forum.html"
+                                style="color: var(--accent-blue); text-decoration: none;">Join Discussions</a></li>
+                        <li><a href="#" style="color: var(--accent-blue); text-decoration: none;">Download Sales
+                                Guide</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="toggleTheme()">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+
+    <script>
+        function toggleNotifications() {
+            document.getElementById('notif-dropdown').classList.toggle('show');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('storieshub-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Apply saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('storieshub-theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        window.onclick = function (event) {
+            if (!event.target.closest('.notification-bell')) {
+                const dropdown = document.getElementById('notif-dropdown');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
+
+    <!-- Internationalization Script -->
+    <script src="js/i18n.js"></script>
+</body>
+
+</html>

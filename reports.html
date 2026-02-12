@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | Reports Dashboard</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --card-light: #ffffff;
+            --card-dark: #1e293b;
+            --premium-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Nav */
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Outer Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .title-area h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .title-area p {
+            color: #64748b;
+            margin: 5px 0 0;
+        }
+
+        /* Filter Pills */
+        .filters {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .filter-pill {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        /* Modern Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            display: block;
+        }
+
+        .stat-delta {
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .delta-up {
+            color: var(--success);
+        }
+
+        /* Glass Charts Area */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            margin-bottom: 3rem;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        /* Tables Premium */
+        .table-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1.25rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        td {
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f8fafc;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .book-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sm-cover {
+            width: 40px;
+            aspect-ratio: 2/3;
+            background: #eee;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Mode Extensions */
+        .dark body {
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+        }
+
+        .dark nav,
+        .dark .chart-container,
+        .dark .stat-card,
+        .dark .table-card {
+            background: var(--card-dark);
+            border-color: #334155;
+        }
+
+        .dark .filter-pill {
+            background: #334155;
+            border-color: #475569;
+            color: #cbd5e1;
+        }
+
+        .dark .page-header p,
+        .dark th {
+            color: #94a3b8;
+        }
+
+        .dark td {
+            border-color: #334155;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .filters {
+                width: 100%;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .filter-pill {
+                white-space: nowrap;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th,
+            td {
+                padding: 0.5rem;
+            }
+
+            .table-card {
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .stat-value {
+                font-size: 1.75rem;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th,
+            td {
+                padding: 0.4rem;
+            }
+
+            /* Hide less important columns on mobile */
+            .hide-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav>
+        <a href="bookshelf.html" class="logo">
+            <span class="logo-text">stories hub</span>
+        </a>
+        <div class="nav-links">
+            <a href="bookshelf.html">Bookshelf</a>
+            <a href="reports.html" class="active">Reports</a>
+            <a href="community_forum.html">Community</a>
+            <a href="marketing.html">Marketing</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <div class="title-area">
+                <h1>Sales Analytics</h1>
+                <p>Tracking your earnings and engagement across all marketplaces.</p>
+            </div>
+            <div class="filters">
+                <button class="filter-pill" onclick="updateChart('7d', this)">7 Days</button>
+                <button class="filter-pill active" onclick="updateChart('30d', this)">30 Days</button>
+                <button class="filter-pill" onclick="updateChart('yearly', this)">Yearly</button>
+            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Royalties Earned</span>
+                <span class="stat-value">$1,284.50</span>
+                <span class="stat-delta delta-up">
+                    <span class="material-icons" style="font-size: 16px;">trending_up</span> 12.4%
+                </span>
+            </div>
+            <div class="stat-card" style="--primary: #4f46e5;">
+                <span class="stat-label">Author Rating</span>
+                <span class="stat-value">4.9 / 5.0</span>
+                <span class="stat-delta" style="color: var(--primary);">
+                    Top 5% of Authors
+                </span>
+            </div>
+            <div class="stat-card" style="--primary: #ec4899;">
+                <span class="stat-label">KENP Pages Read</span>
+                <span class="stat-value">85.2k</span>
+                <span class="stat-delta delta-up">
+                    <span class="material-icons" style="font-size: 16px;">trending_up</span> 8.2%
+                </span>
+            </div>
+            <div class="stat-card" style="--primary: #22c55e;">
+                <span class="stat-label">Marketplace Range</span>
+                <span class="stat-value">12</span>
+                <span class="stat-delta">Countries Reached</span>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <div class="chart-header">
+                <h3>Earnings Trend</h3>
+                <div style="font-size: 0.8rem; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="display:inline-block; width:10px; height:10px; border-radius:50%; background: var(--primary);"></span>
+                    Daily Revenue (USD)
+                </div>
+            </div>
+            <div style="height: 400px; position: relative;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </section>
+
+        <section class="table-card">
+            <div
+                style="padding: 1.5rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0; font-size: 1.1rem;">Top Performing Books</h3>
+                <button
+                    style="font-size: 0.8rem; color: var(--primary); background: none; border: none; font-weight: 700; cursor: pointer;">Export
+                    CSV</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Format</th>
+                        <th>Marketplace</th>
+                        <th>Sold</th>
+                        <th>Earnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#" class="book-link">
+                                <div class="sm-cover">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXRrtK3Fiydi3Ze8KZ8oyxvIq0dV2S3YTpXOISrW-GaPzxg9oq4aS4B0kXL2PMb8qAjT0OOwjVPI44mmVb16cVr5WAagEexp8-PIqzUqmF4iB9gFdmZ72MBJ5rBG_oHjFg-LBURU9KnW-nWvCeFDwHSFo0K8Q7-YWDP2MMyONGH9HeRq7TXiViIoe_rSIBJX8wf4n4QlKHLMKvIUPkl9eCJYzmuyz35POMsjVahk5ZdyDbEekwe5ALTooImhOLEfPBhK5oV6ow36Y"
+                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                                </div>
+                                <div style="font-weight: 700;">Your Wish: యోర్ విష్</div>
+                            </a>
+                        </td>
+                        <td>Digital</td>
+                        <td>Global</td>
+                        <td style="font-weight: 600;">124</td>
+                        <td style="font-weight: 700; color: var(--success);">$345.96</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="book-link">
+                                <div class="sm-cover"
+                                    style="background: var(--secondary); display: flex; align-items: center; justify-content: center; color: #fff;">
+                                    <span class="material-icons" style="font-size: 18px;">book</span>
+                                </div>
+                                <div style="font-weight: 700;">Digital Frontier</div>
+                            </a>
+                        </td>
+                        <td>Paperback</td>
+                        <td>US / UK</td>
+                        <td style="font-weight: 600;">89</td>
+                        <td style="font-weight: 700; color: var(--success);">$214.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(255, 153, 0, 0.4)');
+        gradient.addColorStop(1, 'rgba(255, 153, 0, 0)');
+
+        const chartData = {
+            '7d': {
+                labels: ['Feb 06', 'Feb 07', 'Feb 08', 'Feb 09', 'Feb 10', 'Feb 11', 'Feb 12'],
+                data: [120, 150, 180, 140, 210, 240, 195]
+            },
+            '30d': {
+                labels: ['Jan 15', 'Jan 18', 'Jan 21', 'Jan 24', 'Jan 27', 'Jan 30', 'Feb 02', 'Feb 05', 'Feb 08', 'Feb 12'],
+                data: [45, 82, 60, 110, 95, 150, 130, 180, 210, 195]
+            },
+            'yearly': {
+                labels: ['Mar 25', 'May 25', 'Jul 25', 'Sep 25', 'Nov 25', 'Jan 26'],
+                data: [1200, 2100, 1800, 3200, 4500, 5284]
+            }
+        };
+
+        let revenueChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData['30d'].labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: chartData['30d'].data,
+                    borderColor: '#6366f1',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#6366f1',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    fill: true,
+                    backgroundColor: gradient,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        padding: 12,
+                        titleFont: { family: 'Outfit', size: 14 },
+                        bodyFont: { family: 'Outfit', size: 13 },
+                        displayColors: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9', drawBorder: false },
+                        ticks: { color: '#94a3b8', font: { family: 'Outfit' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { family: 'Outfit' } }
+                    }
+                }
+            }
+        });
+
+        function updateChart(period, element) {
+            // Update active state
+            document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            const selected = chartData[period];
+            revenueChartInstance.data.labels = selected.labels;
+            revenueChartInstance.data.datasets[0].data = selected.data;
+            revenueChartInstance.update();
+        }
+    </script>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="document.body.classList.toggle('dark')"
+            style="position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 50%; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+</body>
+
+</html>

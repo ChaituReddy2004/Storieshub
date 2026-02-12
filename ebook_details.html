@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | eBook Details</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&family=Noto+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Nav Secondary */
+        .nav-secondary {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0.5rem 2rem;
+            background-color: #fff;
+            font-size: 0.75rem;
+            color: #565959;
+            gap: 0.5rem;
+        }
+
+        .nav-secondary a,
+        .nav-secondary button {
+            color: #007185;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .nav-divider-v {
+            width: 1px;
+            height: 12px;
+            background-color: #ccc;
+            margin: 0 0.25rem;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #d5d9d9;
+            padding: 1rem 2rem;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-name-orange {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+
+        .brand-divider {
+            height: 35px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 0.75rem;
+        }
+
+        .brand-subtext {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-subtext span {
+            font-size: 1.1rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .main-nav a {
+            color: #007185;
+            text-decoration: none;
+            padding-bottom: 4px;
+        }
+
+        .main-nav a.active {
+            color: #111;
+            border-bottom: 2px solid #c45500;
+        }
+
+        /* Main Container */
+        .main-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Tabs */
+        .form-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-item {
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #ddd;
+        }
+
+        .tab-item.active {
+            border-top-color: #FF9900;
+        }
+
+        .tab-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .tab-status {
+            font-size: 0.75rem;
+            color: #007185;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tab-status.not-started {
+            color: #767676;
+        }
+
+        /* Form Sections */
+        .form-card {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-section {
+            padding: 2rem;
+            border-bottom: 1px solid #d5d9d9;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .field-desc {
+            font-size: 0.8125rem;
+            color: #565959;
+            line-height: 1.5;
+        }
+
+        .field-desc a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .input-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .form-select,
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.5rem;
+            border: 1px solid #888c8c;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            background-color: #fff;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: #e77600;
+            box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+            outline: none;
+        }
+
+        .form-textarea {
+            max-width: 100%;
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Text Editor Style */
+        .editor-box {
+            border: 1px solid #888c8c;
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .editor-toolbar {
+            background-color: #f0f2f2;
+            padding: 0.5rem;
+            border-bottom: 1px solid #d5d9d9;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tool-btn {
+            background: none;
+            border: 1px solid transparent;
+            padding: 2px 6px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .tool-btn:hover {
+            background-color: #fff;
+            border-color: #adb1b8;
+        }
+
+        /* Bottom Actions */
+        .form-actions {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-outline {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            padding: 0.5rem 2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom, #F7DF61, #EFC100);
+            border: 1px solid #a88734;
+            padding: 0.5rem 2.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .dark body {
+            background-color: #0F1111;
+            color: #E6E6E6;
+        }
+
+        .dark .header,
+        .dark .nav-secondary,
+        .dark .tab-item,
+        .dark .form-card {
+            background-color: #1A1D1D;
+            border-color: #3A3D3D;
+        }
+
+        .dark .form-section {
+            border-color: #3A3D3D;
+        }
+
+        .dark .section-label,
+        .dark .tab-title {
+            color: #fff;
+        }
+
+        .dark .form-input,
+        .dark .form-select,
+        .dark .form-textarea {
+            background-color: #232F3E;
+            color: #fff;
+            border-color: #4b5563;
+        }
+
+        .dark .editor-toolbar {
+            background-color: #232F3E;
+            border-color: #4b5563;
+        }
+
+        .dark .btn-outline {
+            background-color: #3A3D3D;
+            color: #fff;
+            border-color: #4b5563;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-secondary">
+        <a href="#">Your Account</a>
+        <div class="nav-divider-v"></div>
+        <button class="text-link">English <span class="material-icons"
+                style="font-size: 10px;">expand_more</span></button>
+        <div class="nav-divider-v"></div>
+        <a href="#">Help</a>
+        <div class="nav-divider-v"></div>
+        <a href="index.html">Sign out</a>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a class="active" href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="form-tabs">
+            <div class="tab-item active">
+                <div class="tab-title">eBook Details</div>
+                <div class="tab-status">
+                    <span class="material-icons" style="font-size: 14px;">info</span> In progress...
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-title">eBook Content</div>
+                <div class="tab-status not-started">
+                    <span class="material-icons" style="font-size: 14px;">info</span> Not started
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-title">eBook Pricing</div>
+                <div class="tab-status not-started">
+                    <span class="material-icons" style="font-size: 14px;">info</span> Not started
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <!-- Language -->
+            <div class="form-section">
+                <div class="section-label">Language</div>
+                <div class="field-group">
+                    <p class="field-desc">Choose the primary language your book is written in. <a href="#">Supported
+                            languages</a></p>
+                    <select class="form-select">
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>Telugu</option>
+                        <option>Hindi</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Book Title -->
+            <div class="form-section">
+                <div class="section-label">Book Title</div>
+                <div class="field-group">
+                    <p class="field-desc">Enter your title as it appears on the book cover. Before continuing, check
+                        your spelling since this field cannot be updated after publication. <a href="#">Book title
+                            guidelines</a></p>
+                    <div>
+                        <label class="input-label">Book Title</label>
+                        <input class="form-input" placeholder="Title" type="text" />
+                    </div>
+                    <div>
+                        <label class="input-label">Subtitle (Optional)</label>
+                        <input class="form-input" placeholder="Subtitle" type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Series -->
+            <div class="form-section">
+                <div class="section-label">Series</div>
+                <div class="field-group">
+                    <p class="field-desc">If your book is part of a series (or will eventually be), you can add it now.
+                        <a href="#">Learn how to start a series</a>
+                    </p>
+                    <button class="btn-outline" style="width: auto; padding: 4px 16px; border-radius: 4px;">+ Add series
+                        detail</button>
+                </div>
+            </div>
+
+            <!-- Edition -->
+            <div class="form-section">
+                <div class="section-label">Edition Number</div>
+                <div class="field-group">
+                    <p class="field-desc">If this is a new edition of an existing book, enter the edition number. <a
+                            href="#">What is an edition?</a></p>
+                    <input class="form-input" placeholder="Optional" style="max-width: 100px;" type="text" />
+                </div>
+            </div>
+
+            <!-- Author -->
+            <div class="form-section">
+                <div class="section-label">Author</div>
+                <div class="field-group">
+                    <p class="field-desc">Enter the primary author or contributor. Pen names are allowed. <a
+                            href="#">Author guidelines</a></p>
+                    <label class="input-label">Primary Author or Contributor</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <input class="form-input" placeholder="First name" type="text" />
+                        <input class="form-input" placeholder="Last name" type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-section">
+                <div class="section-label">Description</div>
+                <div class="field-group">
+                    <p class="field-desc">Summarize your book. This will be your product description on Stories hub, so
+                        customers can learn more about your book. <a href="#">How do I format the description?</a></p>
+                    <div class="editor-box">
+                        <div class="editor-toolbar">
+                            <button class="tool-btn"><span class="material-icons"
+                                    style="font-size: 18px;">format_bold</span></button>
+                            <button class="tool-btn"><span class="material-icons"
+                                    style="font-size: 18px;">format_italic</span></button>
+                            <button class="tool-btn"><span class="material-icons"
+                                    style="font-size: 18px;">format_underlined</span></button>
+                            <div class="nav-divider-v" style="height: 20px;"></div>
+                            <button class="tool-btn"><span class="material-icons"
+                                    style="font-size: 18px;">format_list_bulleted</span></button>
+                            <button class="tool-btn"><span class="material-icons"
+                                    style="font-size: 18px;">format_list_numbered</span></button>
+                        </div>
+                        <textarea class="form-textarea" placeholder="Enter description here..."
+                            style="border: none;"></textarea>
+                    </div>
+                    <div style="text-align: right; font-size: 0.75rem; color: #565959; font-weight: 700;">4000
+                        characters remaining</div>
+                </div>
+            </div>
+
+            <!-- Publishing Rights -->
+            <div class="form-section">
+                <div class="section-label">Publishing Rights</div>
+                <div class="field-group" style="gap: 0.5rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                        <input id="rights1" name="rights" style="margin-top: 2px;" type="radio" />
+                        <label for="rights1" style="font-size: 0.875rem;">I own the copyright and I hold the necessary
+                            publishing rights. <a href="#" style="color: #007185; text-decoration: none;">What are
+                                publishing rights?</a></label>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                        <input id="rights2" name="rights" style="margin-top: 2px;" type="radio" />
+                        <label for="rights2" style="font-size: 0.875rem;">This is a public domain work.</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keywords -->
+            <div class="form-section">
+                <div class="section-label">Keywords</div>
+                <div class="field-group">
+                    <p class="field-desc">Choose up to 7 keywords highlighting your book's unique traits. <a
+                            href="#">How do I choose keywords?</a></p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                        <input class="form-input" placeholder="Optional" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-outline">Save as Draft</button>
+            <button class="btn-primary" onclick="window.location.href='content_upload.html'">Save and Continue</button>
+        </div>
+        <p style="text-align: right; font-size: 0.75rem; color: #565959; margin-top: 0.5rem;">Next step: Content</p>
+    </div>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="document.body.classList.toggle('dark')">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+</body>
+
+</html>

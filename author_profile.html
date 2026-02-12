@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Chaithanya Reddy | Stories hub Author</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        :root {
+            --brand-primary: #6366f1;
+            --brand-secondary: #0f172a;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-primary);
+        }
+
+        /* Hero */
+        .hero {
+            height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 10% 4rem;
+        }
+
+        .author-identity {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transform: translateY(2rem);
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: var(--card-shadow);
+            background-color: #eee;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .identity-text h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .identity-text p {
+            color: #fff;
+            font-size: 1.25rem;
+            margin: 0.25rem 0 1rem;
+            opacity: 0.9;
+        }
+
+        /* Profile Content */
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 4rem;
+        }
+
+        .bio-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .bio-text {
+            font-size: 1.15rem;
+            color: var(--text-light);
+        }
+
+        .books-grid {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .book-item {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .book-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .book-cover-large {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #eee;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .book-cover-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-title-small {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .book-price-tag {
+            color: var(--brand-primary);
+            font-weight: 700;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .btn-follow-author {
+            background: var(--brand-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .side-widget {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f0f0f0;
+        }
+
+        .side-widget h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .social-icon:hover {
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                height: 300px;
+                padding-bottom: 2rem;
+            }
+
+            .identity-text h1 {
+                font-size: 2rem;
+            }
+
+            .author-identity {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #eee;
+            }
+
+            nav,
+            .side-widget {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+
+            .nav-links a {
+                color: #eee;
+            }
+
+            .bio-text {
+                color: #bbb;
+            }
+
+            .social-icon {
+                background: #333;
+                color: #eee;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="bookshelf.html" class="logo">stories hub</a>
+        <div class="nav-links">
+            <a href="bookshelf.html">Back to Dashboard</a>
+            <a href="#">Shop Books</a>
+            <a href="#">Newsletter</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="author-identity">
+            <div class="avatar">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+                    alt="Chaithanya Reddy">
+            </div>
+            <div class="identity-text">
+                <h1>Chaithanya Reddy</h1>
+                <p>Award-winning Author of Modern Fiction</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="bio-section">
+            <h2>About the Author</h2>
+            <div class="bio-text">
+                <p>Chaithanya Reddy is a writer, storyteller, and digital visionary based in the heart of the creative
+                    world. With a passion for blending traditional storytelling with modern digital experiences,
+                    Chaithanya has published multiple best-sellers on Stories hub.</p>
+                <p>Starting as an independent author, Chaithanya's work often explores themes of identity, technology,
+                    and the human spirit in an ever-changing world. When not writing, he can be found exploring the
+                    digital frontier or mentorship programs for new authors.</p>
+            </div>
+
+            <h2 style="margin-top: 5rem;">Published Works</h2>
+            <div class="books-grid">
+                <div class="book-item">
+                    <div class="book-cover-large">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXRrtK3Fiydi3Ze8KZ8oyxvIq0dV2S3YTpXOISrW-GaPzxg9oq4aS4B0kXL2PMb8qAjT0OOwjVPI44mmVb16cVr5WAagEexp8-PIqzUqmF4iB9gFdmZ72MBJ5rBG_oHjFg-LBURU9KnW-nWvCeFDwHSFo0K8Q7-YWDP2MMyONGH9HeRq7TXiViIoe_rSIBJX8wf4n4QlKHLMKvIUPkl9eCJYzmuyz35POMsjVahk5ZdyDbEekwe5ALTooImhOLEfPBhK5oV6ow36Y"
+                            alt="Your Wish">
+                    </div>
+                    <div class="book-title-small">Your Wish: యోర్ విష్</div>
+                    <div class="book-price-tag">$2.99</div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover-large"
+                        style="background: linear-gradient(135deg, #2c3e50, #000); display: flex; align-items: center; justify-content: center; color: #fff;">
+                        <div style="text-align: center;">
+                            <span class="material-icons" style="font-size: 40px;">stars</span>
+                            <div style="font-size: 0.8rem; font-weight: 700; margin-top: 0.5rem;">NEXT GEN</div>
+                        </div>
+                    </div>
+                    <div class="book-title-small">Digital Frontier</div>
+                    <div class="book-price-tag">$4.99</div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover-large"
+                        style="background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                        <div style="text-align: center;">
+                            <span class="material-icons" style="font-size: 40px;">auto_stories</span>
+                            <div style="font-size: 0.8rem; font-weight: 700; margin-top: 0.5rem;">COMING SOON</div>
+                        </div>
+                    </div>
+                    <div class="book-title-small">The Invisible Thread</div>
+                    <div class="book-author" style="font-size: 0.8rem; color: #999;">Releasing Autumn 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <button class="btn-follow-author">
+                <span class="material-icons">person_add</span> Follow Author
+            </button>
+
+            <div class="side-widget">
+                <h3>Connect</h3>
+                <div class="social-row">
+                    <a href="#" class="social-icon"><span class="material-icons">public</span></a>
+                    <a href="#" class="social-icon"><span class="material-icons">alternate_email</span></a>
+                    <a href="#" class="social-icon"><span class="material-icons">camera_alt</span></a>
+                </div>
+            </div>
+
+            <div class="side-widget">
+                <h3>Newsletter</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem;">Receive monthly updates
+                    on new releases, events, and writing tips from Chaithanya.</p>
+                <input type="email" placeholder="Your email address"
+                    style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; box-sizing: border-box;">
+                <button
+                    style="width: 100%; padding: 0.75rem; background: var(--brand-secondary); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Join
+                    Subscriber List</button>
+            </div>
+
+            <div style="text-align: center;">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuByS9c6YQ9H-f7-nXm-z_f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f"
+                    alt="Stories hub Trusted" style="width: 120px; opacity: 0.3;">
+                <div style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">Stories hub Verified Author</div>
+            </div>
+        </aside>
+    </div>
+
+    <footer style="padding: 4rem 10%; background: #f5f5f5; text-align: center; border-top: 1px solid #eee;">
+        <p style="color: #999; font-size: 0.8rem;">© 2026 Chaithanya Reddy. All Rights Reserved. <br> Powered by Stories
+            hub Publishing.</p>
+    </footer>
+</body>
+
+</html>

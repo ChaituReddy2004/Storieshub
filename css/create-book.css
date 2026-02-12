@@ -1,0 +1,454 @@
+/* Create Book Pages - Shared Styles */
+
+.create-book-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+    background: var(--premium-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.step-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.progress-step.active .step-label {
+    color: #6366f1;
+    font-weight: 700;
+}
+
+.progress-line {
+    width: 80px;
+    height: 2px;
+    background: #e5e7eb;
+    margin: 0 1rem;
+}
+
+/* Hero Section */
+.create-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.create-hero h1 {
+    font-size: 2.5rem;
+    background: var(--premium-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.create-hero p {
+    font-size: 1.2rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Card */
+.form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.dark .form-card {
+    background: #1e293b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.dark .form-card h2 {
+    color: #f1f5f9;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 2.5rem;
+}
+
+.form-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: #334155;
+}
+
+.dark .form-section h3 {
+    color: #e2e8f0;
+}
+
+.form-help {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+/* Form Inputs */
+.form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    color: #1e293b;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.dark .form-input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+.dark .form-input:focus {
+    border-color: #6366f1;
+}
+
+/* Option Grid */
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.option-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.option-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: white;
+    text-align: center;
+}
+
+.dark .option-content {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+.option-card input:checked+.option-content {
+    border-color: #6366f1;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+
+.option-content .material-icons {
+    font-size: 2.5rem;
+    color: #6366f1;
+}
+
+.option-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1e293b;
+}
+
+.dark .option-title {
+    color: #f1f5f9;
+}
+
+.option-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* Info Card */
+.info-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.info-card.premium {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+    border-left-color: #6366f1;
+}
+
+.dark .info-card {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.dark .info-card.premium {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+}
+
+.info-card .material-icons {
+    color: #3b82f6;
+    font-size: 1.5rem;
+}
+
+.info-card.premium .material-icons {
+    color: #6366f1;
+}
+
+.info-card strong {
+    color: #1e293b;
+}
+
+.dark .info-card strong {
+    color: #f1f5f9;
+}
+
+/* Premium Badge */
+.premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--premium-gradient);
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.premium-badge .material-icons {
+    font-size: 1.25rem;
+}
+
+/* Pricing Estimate */
+.pricing-estimate {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.dark .pricing-estimate {
+    background: #0f172a;
+}
+
+.pricing-estimate h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.dark .pricing-estimate h3 {
+    color: #f1f5f9;
+}
+
+.cost-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.dark .cost-item {
+    border-bottom-color: #334155;
+}
+
+.cost-item.total {
+    border-bottom: none;
+    border-top: 2px solid #6366f1;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #6366f1;
+    margin-top: 0.5rem;
+}
+
+.cost-value {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.dark .cost-value {
+    color: #f1f5f9;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--premium-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background: white;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+.dark .btn-secondary {
+    background: #1e293b;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+.btn-secondary:hover {
+    border-color: #6366f1;
+    color: #6366f1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .progress-bar {
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .progress-line {
+        width: 40px;
+        margin: 0 0.5rem;
+    }
+
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .step-label {
+        font-size: 0.75rem;
+    }
+
+    .create-hero h1 {
+        font-size: 2rem;
+    }
+
+    .create-hero p {
+        font-size: 1rem;
+    }
+
+    .form-card {
+        padding: 1.5rem;
+    }
+
+    .option-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column-reverse;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-bar {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+    }
+
+    .create-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .form-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .pricing-estimate {
+        padding: 1rem;
+    }
+}

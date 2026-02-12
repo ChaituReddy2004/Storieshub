@@ -1,0 +1,210 @@
+/* Perfect Alignment Utilities */
+
+/* Flexbox Alignment */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Vertical Centering */
+.v-center {
+    display: flex;
+    align-items: center;
+}
+
+/* Text Alignment */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Icon Alignment Fix */
+.material-icons {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+/* Button Alignment */
+button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Navigation Perfect Alignment */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Header Alignment */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Card Alignment */
+.book-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+/* Stat Card Centering */
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hero Section Alignment */
+.hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* Grid Perfect Alignment */
+.grid-center {
+    display: grid;
+    place-items: center;
+}
+
+/* Container Centering */
+.container-center {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Baseline Reset for Perfect Alignment */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default margins */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin-top: 0;
+}
+
+/* Image Alignment */
+img {
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Table Alignment */
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    vertical-align: middle;
+    padding: 0.75rem 1rem;
+}
+
+/* Form Element Alignment */
+input,
+select,
+textarea {
+    vertical-align: middle;
+}
+
+/* Dropdown Positioning */
+.notif-dropdown,
+#language-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+}
+
+/* Badge Centering */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Metric Alignment */
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Search Bar Alignment */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Footer Alignment */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Progress Bar Alignment */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

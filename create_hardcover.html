@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Create Hardcover | Stories Hub</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/create-book.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="bookshelf-nav-secondary">
+        <div class="notification-bell">
+            <span class="material-icons" style="font-size: 18px;">notifications</span>
+            <span class="badge">3</span>
+        </div>
+        <a href="author_profile.html" style="font-weight: 700; color: #6366f1;">
+            <span class="material-icons" style="font-size: 16px;">visibility</span>
+            <span data-i18n="viewPublicProfile">View Public Profile</span>
+        </a>
+        <div class="nav-divider-small"></div>
+        <div class="language-selector" style="position: relative;">
+            <button class="bg-transparent border-0 cursor-pointer p-0 text-link" onclick="toggleLanguageDropdown()"
+                style="display: flex; align-items: center; gap: 4px;">
+                <span id="current-language">English</span>
+                <span class="material-icons" style="font-size: 10px;">expand_more</span>
+            </button>
+            <div id="language-dropdown" class="notif-dropdown" style="display: none; min-width: 150px;">
+                <div class="notif-header">Select Language</div>
+                <div class="notif-item" onclick="selectLanguage('en')" style="cursor: pointer;">🇬🇧 English</div>
+                <div class="notif-item" onclick="selectLanguage('es')" style="cursor: pointer;">🇪🇸 Español</div>
+                <div class="notif-item" onclick="selectLanguage('fr')" style="cursor: pointer;">🇫🇷 Français</div>
+                <div class="notif-item" onclick="selectLanguage('de')" style="cursor: pointer;">🇩🇪 Deutsch</div>
+                <div class="notif-item" onclick="selectLanguage('hi')" style="cursor: pointer;">🇮🇳 हिन्दी</div>
+                <div class="notif-item" onclick="selectLanguage('te')" style="cursor: pointer;">🇮🇳 తెలుగు</div>
+            </div>
+        </div>
+        <div class="nav-divider-small"></div>
+        <a href="help_center.html" data-i18n="help">Help</a>
+        <div class="nav-divider-small"></div>
+        <a href="index.html" data-i18n="signOut">Sign out</a>
+    </nav>
+
+    <header class="bookshelf-header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext-stack">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav-links">
+                <a href="bookshelf.html" data-i18n="bookshelf">Bookshelf</a>
+                <a href="reports.html" data-i18n="reports">Reports</a>
+                <a href="community_forum.html" data-i18n="community">Community</a>
+                <a href="marketing.html" data-i18n="marketing">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="create-book-container">
+        <div class="progress-bar">
+            <div class="progress-step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Format</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Content</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">4</div>
+                <div class="step-label">Pricing</div>
+            </div>
+        </div>
+
+        <div class="create-hero">
+            <h1>Create Your Hardcover</h1>
+            <p>Premium quality hardcover books for collectors and libraries. Make a lasting impression.</p>
+        </div>
+
+        <div class="form-card">
+            <h2>Hardcover Specifications</h2>
+
+            <div class="premium-badge">
+                <span class="material-icons">workspace_premium</span>
+                <span>Premium Hardcover Edition</span>
+            </div>
+
+            <div class="form-section">
+                <h3>Book Title</h3>
+                <input type="text" class="form-input" placeholder="Enter your book title" id="book-title" />
+            </div>
+
+            <div class="form-section">
+                <h3>Subtitle (Optional)</h3>
+                <input type="text" class="form-input" placeholder="Add a subtitle" id="book-subtitle" />
+            </div>
+
+            <div class="form-section">
+                <h3>Trim Size</h3>
+                <p class="form-help">Premium hardcover dimensions</p>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="6x9" checked />
+                        <div class="option-content">
+                            <span class="material-icons">book</span>
+                            <div class="option-title">6" x 9"</div>
+                            <div class="option-desc">Standard Hardcover</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="7x10" />
+                        <div class="option-content">
+                            <span class="material-icons">menu_book</span>
+                            <div class="option-title">7" x 10"</div>
+                            <div class="option-desc">Large Format</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="8.5x11" />
+                        <div class="option-content">
+                            <span class="material-icons">auto_stories</span>
+                            <div class="option-title">8.5" x 11"</div>
+                            <div class="option-desc">Premium Large</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Cover Finish</h3>
+                <p class="form-help">Choose the look and feel of your hardcover</p>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="finish" value="matte" checked />
+                        <div class="option-content">
+                            <span class="material-icons">texture</span>
+                            <div class="option-title">Matte Laminate</div>
+                            <div class="option-desc">Elegant, non-reflective</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="finish" value="gloss" />
+                        <div class="option-content">
+                            <span class="material-icons">auto_awesome</span>
+                            <div class="option-title">Gloss Laminate</div>
+                            <div class="option-desc">Vibrant, shiny finish</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Interior Type</h3>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="interior" value="bw" checked />
+                        <div class="option-content">
+                            <span class="material-icons">text_fields</span>
+                            <div class="option-title">Black & White</div>
+                            <div class="option-desc">Premium white paper</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="interior" value="color" />
+                        <div class="option-content">
+                            <span class="material-icons">palette</span>
+                            <div class="option-title">Full Color</div>
+                            <div class="option-desc">Premium color printing</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Dust Jacket</h3>
+                <p class="form-help">Add a removable dust jacket for extra protection and appeal</p>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="dust-jacket" value="no" checked />
+                        <div class="option-content">
+                            <span class="material-icons">check_box_outline_blank</span>
+                            <div class="option-title">No Dust Jacket</div>
+                            <div class="option-desc">Case laminate only</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="dust-jacket" value="yes" />
+                        <div class="option-content">
+                            <span class="material-icons">library_books</span>
+                            <div class="option-title">With Dust Jacket</div>
+                            <div class="option-desc">Premium presentation</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Estimated Page Count</h3>
+                <input type="number" class="form-input" placeholder="Enter page count (75-550 pages)" min="75" max="550"
+                    id="page-count" />
+                <p class="form-help">Hardcover books require a minimum of 75 pages</p>
+            </div>
+
+            <div class="info-card premium">
+                <span class="material-icons">stars</span>
+                <div>
+                    <strong>Premium Quality:</strong> Hardcover books feature superior binding, premium paper stock, and
+                    a professional finish that stands the test of time. Perfect for collectors, libraries, and special
+                    editions.
+                </div>
+            </div>
+
+            <div class="pricing-estimate">
+                <h3>Estimated Costs</h3>
+                <div class="cost-breakdown">
+                    <div class="cost-item">
+                        <span>Base Printing Cost:</span>
+                        <span class="cost-value">$8.50</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Per Page (est. 200 pages):</span>
+                        <span class="cost-value">$2.40</span>
+                    </div>
+                    <div class="cost-item total">
+                        <span>Total Per Unit:</span>
+                        <span class="cost-value">$10.90</span>
+                    </div>
+                </div>
+                <p class="form-help">Final costs will be calculated based on your exact specifications</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-secondary" onclick="window.location.href='bookshelf.html'">
+                <span class="material-icons">arrow_back</span>
+                Cancel
+            </button>
+            <button class="btn-primary" onclick="window.location.href='ebook_details.html'">
+                Continue to Details
+                <span class="material-icons">arrow_forward</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        // Save form data to localStorage
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => {
+                const formData = {
+                    title: document.getElementById('book-title').value,
+                    subtitle: document.getElementById('book-subtitle').value,
+                    trimSize: document.querySelector('input[name="trim-size"]:checked').value,
+                    finish: document.querySelector('input[name="finish"]:checked').value,
+                    interior: document.querySelector('input[name="interior"]:checked').value,
+                    dustJacket: document.querySelector('input[name="dust-jacket"]:checked').value,
+                    pageCount: document.getElementById('page-count').value
+                };
+                localStorage.setItem('hardcover-specs', JSON.stringify(formData));
+            });
+        });
+
+        // Load saved data
+        const savedData = localStorage.getItem('hardcover-specs');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            if (data.title) document.getElementById('book-title').value = data.title;
+            if (data.subtitle) document.getElementById('book-subtitle').value = data.subtitle;
+            if (data.pageCount) document.getElementById('page-count').value = data.pageCount;
+        }
+    </script>
+</body>
+
+</html>

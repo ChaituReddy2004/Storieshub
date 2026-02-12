@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | Community Forum</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --bg-light: #f8fafc;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            --premium-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Nav */
+        nav.nav-premium {
+            background-color: #fff;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-premium a,
+        .nav-premium button {
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header-premium {
+            background: #fff;
+            padding: 1rem 5%;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-divider {
+            height: 30px;
+            width: 1px;
+            background: #ddd;
+            margin: 0 1rem;
+        }
+
+        .logo-sub {
+            display: flex;
+            flex-direction: column;
+            font-size: 1rem;
+            color: #888;
+            text-transform: lowercase;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .main-nav a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Forum Banner */
+        .forum-banner {
+            background: linear-gradient(135deg, #232f3e 0%, #131921 100%);
+            color: #fff;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .banner-content h1 {
+            font-size: 3rem;
+            margin: 0 0 1rem;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Grid */
+        .page-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 3rem;
+        }
+
+        .faq-alert {
+            grid-column: 1 / -1;
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 1px solid #fed7aa;
+            background-color: #fffaf0;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .alert-icon {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        /* Topic Cards */
+        .topics-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .topic-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .topic-card .material-icons {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .topic-name {
+            display: block;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-stats {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Discussion List */
+        .discussion-list {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+        }
+
+        .discussion-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s;
+        }
+
+        .discussion-item:hover {
+            background: #fafafa;
+        }
+
+        .user-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .item-main {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+        }
+
+        .item-title:hover {
+            color: var(--accent);
+        }
+
+        .item-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+
+        .item-meta b {
+            color: var(--accent);
+        }
+
+        .item-badges {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .badge-solved {
+            background: #d1fae5;
+            color: #065f46;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .item-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 80px;
+            gap: 4px;
+        }
+
+        .stat-line {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .widget {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+        }
+
+        .widget-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        .search-field {
+            display: flex;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-field input {
+            border: none;
+            background: none;
+            outline: none;
+            flex-grow: 1;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .list-unstyled {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-unstyled li {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .list-unstyled a {
+            text-decoration: none;
+            color: #64748b;
+            transition: color 0.2s;
+        }
+
+        .list-unstyled a:hover {
+            color: var(--primary);
+        }
+
+        .contributor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .peer-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .peer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            overflow: hidden;
+        }
+
+        .peer-info b {
+            font-size: 0.85rem;
+            color: #1e293b;
+            display: block;
+        }
+
+        .peer-info span {
+            font-size: 0.7rem;
+            color: #94a3b8;
+        }
+
+        /* Dark Mode */
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .dark .header-premium,
+        .dark .nav-premium,
+        .dark .widget,
+        .dark .discussion-list,
+        .dark .topic-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .dark .logo-text {
+            color: var(--primary);
+        }
+
+        .dark .item-title,
+        .dark .topic-name {
+            color: #f1f5f9;
+        }
+
+        .dark .item-meta,
+        .dark .stat-line,
+        .dark .faq-alert p {
+            color: #94a3b8;
+        }
+
+        .dark .discussion-item:hover {
+            background: #334155;
+        }
+
+        .dark .faq-alert {
+            background: #2d2a1e;
+            border-color: #f59e0b;
+        }
+
+        .dark .search-field {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .dark .user-circle {
+            background: #0f172a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .main-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .forum-banner {
+                padding: 2rem 1rem;
+            }
+
+            .banner-content h1 {
+                font-size: 2rem;
+            }
+
+            .page-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-alert {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .discussion-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .item-stats {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-premium {
+                font-size: 0.7rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .logo-divider {
+                display: none;
+            }
+
+            .banner-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .banner-content p {
+                font-size: 1rem;
+            }
+
+            .topic-card {
+                padding: 1.5rem;
+            }
+
+            .discussion-list {
+                padding: 1rem;
+            }
+
+            .user-circle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .item-title {
+                font-size: 1rem;
+            }
+        }
+
+        .notif-bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bell-dot {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-premium">
+        <div class="notif-bell">
+            <span class="material-icons" style="font-size: 20px; color: #64748b;">notifications</span>
+            <span class="bell-dot"></span>
+        </div>
+        <a href="author_profile.html" style="color: var(--primary); font-weight: 700;">Author Profile</a>
+        <div style="height: 12px; width: 1px; background: #ddd;"></div>
+        <a href="help_center.html">Help</a>
+        <a href="index.html">Sign out</a>
+    </nav>
+
+    <header class="header-premium">
+        <div class="header-content">
+            <a class="logo-box" href="bookshelf.html">
+                <div class="logo-text">stories hub</div>
+                <div class="logo-divider"></div>
+                <div class="logo-sub">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a class="active" href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="forum-banner">
+            <div class="banner-content">
+                <h1>Community Support</h1>
+                <p>Connect with a global network of 50,000+ authors. Share insights, solve formatting puzzles, and
+                    celebrate your publishing journey together.</p>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <section class="main-content">
+                <div class="faq-alert">
+                    <span class="material-icons alert-icon">lightbulb</span>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.1rem;">Quick Tip: Check the FAQs</h3>
+                        <p style="margin: 5px 0 0;">Most formatting and royalty questions are already answered in our
+                            pinned community guides.</p>
+                    </div>
+                </div>
+
+                <div class="topics-section">
+                    <h2>Browse Categories</h2>
+                    <div class="topics-grid">
+                        <a href="forum_topic.html" class="topic-card">
+                            <span class="material-icons">campaign</span>
+                            <span class="topic-name">Marketing & Promotion</span>
+                            <span class="topic-stats">8.8k Questions</span>
+                        </a>
+                        <a href="#" class="topic-card">
+                            <span class="material-icons">assessment</span>
+                            <span class="topic-name">Payments & Reports</span>
+                            <span class="topic-stats">15.6k Questions</span>
+                        </a>
+                        <a href="#" class="topic-card">
+                            <span class="material-icons">menu_book</span>
+                            <span class="topic-name">Managing Your Book</span>
+                            <span class="topic-stats">25.9k Questions</span>
+                        </a>
+                        <a href="#" class="topic-card">
+                            <span class="material-icons">draw</span>
+                            <span class="topic-name">Formatting</span>
+                            <span class="topic-stats">32.7k Questions</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="discussion-list">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="margin: 0; font-size: 1.5rem;">Recent Discussions</h2>
+                        <button class="btn-amazon"
+                            style="background: var(--primary); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer;">Start
+                            Discussion</button>
+                    </div>
+
+                    <!-- Item 1 -->
+                    <div class="discussion-item">
+                        <div class="user-circle"><span class="material-icons" style="color: #cbd5e1;">person</span>
+                        </div>
+                        <div class="item-main">
+                            <div class="item-title">Ebook formatting for fixed-layout children's books</div>
+                            <div class="item-meta">by <b>CreativeAuthor</b> • Formatting • 2 hours ago</div>
+                            <div class="item-badges"><span class="badge-solved">Solved</span></div>
+                        </div>
+                        <div class="item-stats">
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">visibility</span> 142</div>
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">chat_bubble_outline</span> 8</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="discussion-item">
+                        <div class="user-circle"><span class="material-icons" style="color: #cbd5e1;">person</span>
+                        </div>
+                        <div class="item-main">
+                            <div class="item-title">When do January royalties get finalized?</div>
+                            <div class="item-meta">by <b>NovicePub</b> • Payments & Reports • 5 hours ago</div>
+                        </div>
+                        <div class="item-stats">
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">visibility</span> 890</div>
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">chat_bubble_outline</span> 24</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="discussion-item">
+                        <div class="user-circle" style="background: #fff4e5;"><span class="material-icons"
+                                style="color: var(--primary);">verified</span></div>
+                        <div class="item-main">
+                            <div class="item-title">Marketing Virtual Round Table: Share your 2026 advice!</div>
+                            <div class="item-meta">by <b>HubAdmin: Tim</b> • Marketing • 1 day ago</div>
+                        </div>
+                        <div class="item-stats">
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">visibility</span> 12.5k</div>
+                            <div class="stat-line"><span class="material-icons"
+                                    style="font-size: 14px;">chat_bubble_outline</span> 118</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button
+                        style="background: none; border: 1px solid #e2e8f0; padding: 12px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; color: #64748b;">Load
+                        More Posts</button>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">Forum Search</h3>
+                    <div class="search-field">
+                        <span class="material-icons" style="color: #94a3b8; font-size: 18px;">search</span>
+                        <input type="text" placeholder="Search keywords...">
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">How-to Guide for Forums</a></li>
+                        <li><a href="#">Report a Violation</a></li>
+                        <li><a href="#">Stories hub FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Top Contributors</h3>
+                    <div class="contributor-list">
+                        <div class="peer-item">
+                            <div class="peer-avatar"><img
+                                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100"
+                                    style="width:100%; height:100%; object-fit:cover;"></div>
+                            <div class="peer-info"><b>L. Acton</b><span>15.2k points • Level 12</span></div>
+                        </div>
+                        <div class="peer-item">
+                            <div class="peer-avatar"><img
+                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100"
+                                    style="width:100%; height:100%; object-fit:cover;"></div>
+                            <div class="peer-info"><b>C. Walton</b><span>12.1k points • Level 10</span></div>
+                        </div>
+                        <div class="peer-item">
+                            <div class="peer-avatar"><img
+                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100"
+                                    style="width:100%; height:100%; object-fit:cover;"></div>
+                            <div class="peer-info"><b>Chaithanya Reddy</b><span>8.4k points • Level 8</span></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer style="background: #fff; border-top: 1px solid #eee; padding: 4rem 5%;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3rem;">
+            <div>
+                <div style="font-weight: 700; font-size: 1.25rem; color: var(--primary); margin-bottom: 1rem;">stories
+                    hub</div>
+                <p style="font-size: 0.8rem; color: #94a3b8; line-height: 1.6; max-width: 300px;">Helping authors reach
+                    millions of readers worldwide since 2026.</p>
+            </div>
+            <div style="display: flex; gap: 4rem;">
+                <div>
+                    <h4 style="font-size: 0.9rem; margin-bottom: 1rem;">Authors</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="bookshelf.html">Dashboard</a></li>
+                        <li><a href="reports.html">Sales Analytics</a></li>
+                        <li><a href="marketing.html">Marketing tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.9rem; margin-bottom: 1rem;">Support</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="help_center.html">Help Center</a></li>
+                        <li><a href="community_forum.html">Community</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div
+            style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #f1f5f9; font-size: 0.75rem; color: #94a3b8;">
+            © 2026, Stories hub Publishing. All Rights Reserved.
+        </div>
+    </footer>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="toggleTheme()"
+            style="position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 50%; cursor: pointer;">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('storieshub-theme', isDark ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('storieshub-theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark');
+        });
+    </script>
+</body>
+
+</html>

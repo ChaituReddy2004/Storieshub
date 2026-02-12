@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | Forum Topic</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --bg-light: #f8fafc;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Nav */
+        nav.nav-premium {
+            background-color: #fff;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-premium a,
+        .nav-premium button {
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header-premium {
+            background: #fff;
+            padding: 1rem 5%;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-divider {
+            height: 30px;
+            width: 1px;
+            background: #ddd;
+            margin: 0 1rem;
+        }
+
+        .logo-sub {
+            display: flex;
+            flex-direction: column;
+            font-size: 1rem;
+            color: #888;
+            text-transform: lowercase;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .main-nav a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Forum Header */
+        .forum-sub-banner {
+            background: #fff;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .banner-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .breadcrumbs a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .banner-inner h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Content */
+        .page-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 3rem;
+        }
+
+        .discussion-list {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+        }
+
+        .discussion-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s;
+        }
+
+        .discussion-item:hover {
+            background: #fafafa;
+        }
+
+        .user-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .item-main {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+        }
+
+        .item-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .item-stats-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 100px;
+        }
+
+        .stat-count {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .widget {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+        }
+
+        .widget-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        .btn-premium-vibrant {
+            width: 100%;
+            background: linear-gradient(135deg, #ff9900 0%, #ffb84d 100%);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.25);
+            margin-bottom: 1rem;
+        }
+
+        .list-sidebar {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-sidebar li {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .list-sidebar a {
+            text-decoration: none;
+            color: #64748b;
+            transition: color 0.2s;
+        }
+
+        .list-sidebar a:hover {
+            color: var(--primary);
+        }
+
+        /* Dark Mode */
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .dark .header-premium,
+        .dark .nav-premium,
+        .dark .widget,
+        .dark .discussion-list,
+        .dark .forum-sub-banner {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .dark .item-title,
+        .dark .banner-inner h1,
+        .dark .stat-count {
+            color: #f1f5f9;
+        }
+
+        .dark .item-meta,
+        .dark .stat-label,
+        .dark .stat-item {
+            color: #94a3b8;
+        }
+
+        .dark .discussion-item:hover {
+            background: #334155;
+        }
+
+        .dark .user-circle {
+            background: #0f172a;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-premium">
+        <a href="author_profile.html" style="color: var(--primary); font-weight: 700;">Author Profile</a>
+        <div style="height: 12px; width: 1px; background: #ddd;"></div>
+        <a href="help_center.html">Help</a>
+        <a href="index.html">Sign out</a>
+    </nav>
+
+    <header class="header-premium">
+        <div class="header-content">
+            <a class="logo-box" href="bookshelf.html">
+                <div class="logo-text">stories hub</div>
+                <div class="logo-divider"></div>
+                <div class="logo-sub">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a class="active" href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="forum-sub-banner">
+            <div class="banner-inner">
+                <div class="breadcrumbs">
+                    <a href="community_forum.html">Community Hub</a> / Marketing & Promotion
+                </div>
+                <h1>
+                    Marketing & Promotion Strategy
+                    <span class="material-icons"
+                        style="color: #64748b; font-size: 20px; cursor: pointer;">notifications_none</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <section class="main-content">
+                <div class="discussion-list">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                        <input type="text" placeholder="Filter threads..."
+                            style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: inherit; font-size: 0.9rem; flex-grow: 1;">
+                        <select
+                            style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: inherit; font-size: 0.9rem;">
+                            <option>Most Recent</option>
+                            <option>Most Viewed</option>
+                        </select>
+                    </div>
+
+                    <!-- Threads -->
+                    <div class="discussion-item">
+                        <div class="user-circle"><span class="material-icons"
+                                style="color: var(--primary);">push_pin</span></div>
+                        <div class="item-main">
+                            <div class="item-title">Welcome to the Marketing Strategy Board! READ FIRST</div>
+                            <div class="item-meta">by <b>HubAdmin</b> • 4 days ago</div>
+                            <div class="stat-group">
+                                <div class="stat-item"><span class="material-icons"
+                                        style="font-size: 14px;">visibility</span> 45.2k</div>
+                                <div class="stat-item"><span class="material-icons"
+                                        style="font-size: 14px;">thumb_up</span> 1.2k</div>
+                            </div>
+                        </div>
+                        <div class="item-stats-right">
+                            <div class="stat-count">562</div>
+                            <div class="stat-label">Replies</div>
+                        </div>
+                    </div>
+
+                    <div class="discussion-item">
+                        <div class="user-circle"><span class="material-icons" style="color: #cbd5e1;">person</span>
+                        </div>
+                        <div class="item-main">
+                            <div class="item-title">How to leverage Stories hub Select for a New Release?</div>
+                            <div class="item-meta">by <b>ChaituReddy</b> • 3 hours ago</div>
+                            <div class="stat-group">
+                                <div class="stat-item"><span class="material-icons"
+                                        style="font-size: 14px;">visibility</span> 124</div>
+                                <div class="stat-item"><span class="material-icons"
+                                        style="font-size: 14px;">thumb_up</span> 12</div>
+                            </div>
+                        </div>
+                        <div class="item-stats-right">
+                            <div class="stat-count">8</div>
+                            <div class="stat-label">Replies</div>
+                        </div>
+                    </div>
+
+                    <div class="discussion-item">
+                        <div class="user-circle"><span class="material-icons" style="color: #cbd5e1;">person</span>
+                        </div>
+                        <div class="item-main">
+                            <div class="item-title">Amazon Ads vs Social Media Ads: My 2026 Test Results</div>
+                            <div class="item-meta">by <b>AuthorExpert</b> • 5 hours ago</div>
+                            <div class="stat-group">
+                                <div class="stat-item"><span class="material-icons"
+                                        style="font-size: 14px;">visibility</span> 1.2k</div>
+                            </div>
+                        </div>
+                        <div class="item-stats-right">
+                            <div class="stat-count">45</div>
+                            <div class="stat-label">Replies</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button
+                        style="background: none; border: 1px solid #e2e8f0; padding: 12px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; color: #64748b;">Previous
+                        Threads</button>
+                    <button
+                        style="background: var(--secondary); color: #fff; border: none; padding: 12px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; margin-left: 1rem;">Next
+                        Threads</button>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <button class="btn-premium-vibrant">Post New Thread</button>
+
+                <div class="widget">
+                    <h3 class="widget-title">Forum Summary</h3>
+                    <p style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">Discuss cross-platform promotions,
+                        social media hacks, and official Stories hub tools.</p>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Board Moderators</h3>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <div class="user-circle" style="width: 32px; height: 32px;" title="Tim (Admin)"><span
+                                class="material-icons" style="font-size: 16px;">verified_user</span></div>
+                        <div class="user-circle" style="width: 32px; height: 32px;" title="Sara (Expert)"><span
+                                class="material-icons" style="font-size: 16px;">auto_awesome</span></div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Related Categories</h3>
+                    <ul class="list-sidebar">
+                        <li><a href="#">Managing your Book</a></li>
+                        <li><a href="#">Stories hub Select</a></li>
+                        <li><a href="#">Formatting Hub</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer style="background: #fff; border-top: 1px solid #eee; padding: 4rem 5%;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div style="font-weight: 700; font-size: 1.25rem; color: var(--primary); margin-bottom: 2rem;">stories hub
+            </div>
+            <p style="font-size: 0.75rem; color: #94a3b8;">© 2026, Stories hub Publishing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="toggleTheme()"
+            style="position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 50%; cursor: pointer;">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('storieshub-theme', isDark ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('storieshub-theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark');
+        });
+    </script>
+</body>
+
+</html>

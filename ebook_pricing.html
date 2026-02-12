@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | eBook Pricing</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&family=Noto+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Nav Secondary */
+        .nav-secondary {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0.5rem 2rem;
+            background-color: #fff;
+            font-size: 0.75rem;
+            color: #565959;
+            gap: 0.5rem;
+        }
+
+        .nav-secondary a,
+        .nav-secondary button {
+            color: #007185;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .nav-divider-v {
+            width: 1px;
+            height: 12px;
+            background-color: #ccc;
+            margin: 0 0.25rem;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #d5d9d9;
+            padding: 1rem 2rem;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-name-orange {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+
+        .brand-divider {
+            height: 35px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 0.75rem;
+        }
+
+        .brand-subtext {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-subtext span {
+            font-size: 1.1rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .main-nav a {
+            color: #007185;
+            text-decoration: none;
+            padding-bottom: 4px;
+        }
+
+        .main-nav a.active {
+            color: #111;
+            border-bottom: 2px solid #c45500;
+        }
+
+        /* Main Container */
+        .main-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Tabs */
+        .form-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-item {
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #ddd;
+        }
+
+        .tab-item.active {
+            border-top-color: #FF9900;
+        }
+
+        .tab-item.complete {
+            border-top-color: #007600;
+        }
+
+        .tab-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .tab-status {
+            font-size: 0.75rem;
+            color: #007185;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tab-status.complete {
+            color: #007600;
+        }
+
+        /* Form Sections */
+        .form-card {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            padding: 2rem;
+            border-bottom: 1px solid #d5d9d9;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .field-desc {
+            font-size: 0.8125rem;
+            color: #565959;
+            line-height: 1.5;
+        }
+
+        .field-desc a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        /* Pricing Table */
+        .pricing-table-container {
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8125rem;
+        }
+
+        .pricing-table th {
+            background-color: #f0f2f2;
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #d5d9d9;
+            color: #007185;
+            font-weight: 700;
+        }
+
+        .pricing-table td {
+            padding: 1rem 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr.odd {
+            background-color: #f9f9f9;
+        }
+
+        .price-input-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .small-input {
+            width: 80px;
+            padding: 0.4rem;
+            border: 1px solid #888c8c;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        /* Enrollment Box */
+        .enroll-box {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+
+        /* Bottom Actions */
+        .form-actions {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-outline {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            padding: 0.5rem 2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .btn-primary-publish {
+            background: linear-gradient(to bottom, #F7DF61, #EFC100);
+            border: 1px solid #a88734;
+            padding: 0.6rem 3rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #111;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .dark body {
+            background-color: #0F1111;
+            color: #E6E6E6;
+        }
+
+        .dark .header,
+        .dark .nav-secondary,
+        .dark .tab-item,
+        .dark .form-card {
+            background-color: #1A1D1D;
+            border-color: #3A3D3D;
+        }
+
+        .dark .form-section {
+            border-color: #3A3D3D;
+        }
+
+        .dark .pricing-table th {
+            background-color: #232F3E;
+            border-color: #3A3D3D;
+            color: #38bdf8;
+        }
+
+        .dark .pricing-table td {
+            border-color: #3A3D3D;
+        }
+
+        .dark .pricing-table tr.odd {
+            background-color: #1c232b;
+        }
+
+        .dark .small-input {
+            background-color: #232F3E;
+            color: #fff;
+            border-color: #4b5563;
+        }
+
+        .dark .btn-outline {
+            background-color: #3A3D3D;
+            color: #fff;
+            border-color: #4b5563;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-secondary">
+        <a href="#">Your Account</a>
+        <div class="nav-divider-v"></div>
+        <button class="text-link">English <span class="material-icons"
+                style="font-size: 10px;">expand_more</span></button>
+        <div class="nav-divider-v"></div>
+        <a href="#">Help</a>
+        <div class="nav-divider-v"></div>
+        <a href="index.html">Sign out</a>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a class="active" href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="form-tabs">
+            <div class="tab-item complete">
+                <div class="tab-title">eBook Details</div>
+                <div class="tab-status complete">
+                    <span class="material-icons" style="font-size: 14px;">check_circle</span> Complete
+                </div>
+            </div>
+            <div class="tab-item complete">
+                <div class="tab-title">eBook Content</div>
+                <div class="tab-status complete">
+                    <span class="material-icons" style="font-size: 14px;">check_circle</span> Complete
+                </div>
+            </div>
+            <div class="tab-item active">
+                <div class="tab-title">eBook Pricing</div>
+                <div class="tab-status">
+                    <span class="material-icons" style="font-size: 14px;">info</span> In progress...
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <!-- Enrollment -->
+            <div class="form-section">
+                <div class="section-label">Enrollment</div>
+                <div class="field-group">
+                    <p class="field-desc"><b>Reach more readers. Maximize your sales potential.</b> (Optional)<br>
+                        Stories hub Select is a free program that allows you to reach more readers through Stories hub
+                        Unlimited. <a href="#">Rules and requirements</a></p>
+                    <label class="enroll-box">
+                        <input type="checkbox" style="margin-top: 4px;" />
+                        <span style="font-size: 0.875rem;">Enroll my book in Stories hub Select</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Territories -->
+            <div class="form-section">
+                <div class="section-label">Territories</div>
+                <div class="field-group">
+                    <p class="field-desc">Select the territories where you have rights to sell this book. <a
+                            href="#">Which territory option should I pick?</a></p>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <label class="enroll-box">
+                            <input checked name="territory" type="radio" />
+                            <span style="font-size: 0.875rem;"><b>All territories (worldwide rights)</b> <a
+                                    href="#">What are worldwide rights?</a></span>
+                        </label>
+                        <label class="enroll-box">
+                            <input name="territory" type="radio" />
+                            <span style="font-size: 0.875rem;"><b>Individual territories</b></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing -->
+            <div class="form-section">
+                <div class="section-label">Pricing</div>
+                <div class="field-group">
+                    <p class="field-desc">Select a royalty plan and set your eBook list prices. <a href="#">How does
+                            pricing work?</a></p>
+
+                    <div style="display: flex; gap: 2rem; margin-bottom: 1rem;">
+                        <label class="enroll-box" style="align-items: center;">
+                            <input name="royalty" type="radio" />
+                            <span style="font-size: 0.875rem;">35%</span>
+                        </label>
+                        <label class="enroll-box" style="align-items: center;">
+                            <input checked name="royalty" type="radio" />
+                            <span style="font-size: 0.875rem;">70%</span>
+                        </label>
+                    </div>
+
+                    <div class="pricing-table-container">
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Marketplace</th>
+                                    <th>List Price</th>
+                                    <th>Delivery</th>
+                                    <th>Rate</th>
+                                    <th>Royalty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Amazon.com</b></td>
+                                    <td>
+                                        <div class="price-input-box">
+                                            <input class="small-input" placeholder="2.99" type="text" />
+                                            <span>USD</span>
+                                        </div>
+                                    </td>
+                                    <td>$0.00</td>
+                                    <td>70%</td>
+                                    <td><b>$2.09</b></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><b>Amazon.in</b></td>
+                                    <td>
+                                        <div class="price-input-box">
+                                            <input class="small-input" placeholder="199" type="text" />
+                                            <span>INR</span>
+                                        </div>
+                                    </td>
+                                    <td>₹0.00</td>
+                                    <td>70%</td>
+                                    <td><b>₹139.30</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Amazon.co.uk</b></td>
+                                    <td>
+                                        <div class="price-input-box">
+                                            <input class="small-input" placeholder="1.99" type="text" />
+                                            <span>GBP</span>
+                                        </div>
+                                    </td>
+                                    <td>£0.00</td>
+                                    <td>70%</td>
+                                    <td><b>£1.39</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms -->
+            <div class="form-section">
+                <div class="section-label">Terms</div>
+                <div class="field-group">
+                    <p class="field-desc" style="font-size: 0.75rem;">It can take up to 72 hours for your title to be
+                        available for purchase.</p>
+                    <p style="font-size: 0.8125rem; font-weight: 700;">By clicking Publish below, I confirm that I agree
+                        to the <a href="#">Stories hub Terms and Conditions</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-outline" onclick="window.location.href='content_upload.html'">&lt; Back to
+                Content</button>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-outline">Save as Draft</button>
+                <button class="btn-primary-publish"
+                    onclick="alert('Congratulations! Your eBook has been submitted for review.'); window.location.href='bookshelf.html'">Publish
+                    Your Kindle eBook</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="document.body.classList.toggle('dark')">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+</body>
+
+</html>

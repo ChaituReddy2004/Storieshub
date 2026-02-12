@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | Create New</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&family=Noto+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            background-color: #fff;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Nav Secondary */
+        .nav-secondary {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0.5rem 4rem;
+            background-color: #fff;
+            font-size: 0.75rem;
+            color: #565959;
+            gap: 0.5rem;
+        }
+
+        .nav-secondary a,
+        .nav-secondary button {
+            color: #007185;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .nav-secondary a:hover {
+            color: #C7511F;
+            text-decoration: underline;
+        }
+
+        .nav-divider-v {
+            width: 1px;
+            height: 12px;
+            background-color: #ccc;
+            margin: 0 0.25rem;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #d5d9d9;
+            padding: 1.5rem 4rem;
+            background-color: #fff;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-name-orange {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+
+        .brand-divider {
+            height: 50px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 1rem;
+        }
+
+        .brand-subtext {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-subtext span {
+            font-size: 1.5rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 1rem;
+        }
+
+        .main-nav a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .main-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.8125rem;
+            margin-bottom: 2rem;
+            color: #007185;
+        }
+
+        .breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.5rem;
+            color: #111;
+            font-weight: bold;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 400;
+            margin: 0 0 0.75rem;
+            color: #111;
+        }
+
+        .page-desc {
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-link {
+            color: #007185;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .selection-card {
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff, #f7fafa);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon-sketch {
+            height: 100px;
+            width: 140px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon-sketch img {
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0.7;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            font-size: 0.8125rem;
+            color: #565959;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+            flex-grow: 1;
+        }
+
+        .card-text a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .btn-selection {
+            background-color: #FFD814;
+            border: 1px solid #a88734;
+            border-radius: 20px;
+            padding: 0.375rem 2rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .btn-selection:hover {
+            background-color: #F7CA00;
+        }
+
+        /* Pro Tip */
+        .pro-tip {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.8125rem;
+            color: #111;
+            align-items: flex-start;
+            margin-top: 4rem;
+        }
+
+        .pro-tip-icon {
+            color: #007185;
+            font-size: 1.25rem;
+        }
+
+        .pro-tip a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        /* Multi-Row Banner */
+        .promo-section {
+            background-color: #fff;
+            border-top: 1px solid #d5d9d9;
+            border-bottom: 1px solid #d5d9d9;
+            padding: 1.5rem 0;
+        }
+
+        .promo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .kdp-badge {
+            background-color: #FF9900;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-right: 1.5rem;
+            font-style: italic;
+            font-size: 1.5rem;
+        }
+
+        .promo-text {
+            flex-grow: 1;
+            font-size: 0.875rem;
+        }
+
+        .promo-text a {
+            color: #007185;
+            text-decoration: underline;
+        }
+
+        .author-earnings {
+            text-align: right;
+        }
+
+        .earnings-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: #565959;
+            text-transform: uppercase;
+        }
+
+        .earnings-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #c45500;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 4rem;
+            background-color: #fff;
+        }
+
+        .footer-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+
+        .footer-amazon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .footer-social a {
+            color: #007185;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            font-size: 0.6875rem;
+        }
+
+        .service-title {
+            font-weight: 700;
+            color: #007185;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-desc {
+            color: #565959;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.6875rem;
+            color: #007185;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .copyright-text {
+            text-align: center;
+            font-size: 0.6875rem;
+            color: #767676;
+            line-height: 1.6;
+        }
+
+        .dark body {
+            background-color: #0F1111;
+            color: #E6E6E6;
+        }
+
+        .dark .header,
+        .dark .nav-secondary,
+        .dark .promo-section {
+            background-color: #1A1D1D;
+            border-color: #3A3D3D;
+        }
+
+        .dark .selection-card {
+            background: #232F3E;
+            border-color: #3A3D3D;
+        }
+
+        .dark .page-title,
+        .dark .card-title,
+        .dark .earnings-value {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-secondary">
+        <a href="#">Your Account</a>
+        <div class="nav-divider-v"></div>
+        <button class="text-link">English <span class="material-icons-outlined"
+                style="font-size: 10px;">expand_more</span></button>
+        <div class="nav-divider-v"></div>
+        <a href="#">Help</a>
+        <div class="nav-divider-v"></div>
+        <a href="index.html">Sign out</a>
+        <div class="nav-divider-v"></div>
+        <button class="text-link">Give Feedback <span class="material-icons-outlined"
+                style="font-size: 10px; color: #ff9900;">expand_more</span></button>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="bookshelf.html">Bookshelf</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>Create New</span>
+        </div>
+
+        <h1 class="page-title">What would you like to create?</h1>
+        <p class="page-desc">Pick an option and we'll get you started. You can save your progress as you go.</p>
+        <a class="process-link" href="#">
+            Learn about the publishing process <span class="material-icons-outlined"
+                style="margin-left: 0.25rem;">expand_more</span>
+        </a>
+
+        <div class="cards-grid">
+            <div class="selection-card">
+                <div class="card-icon-box">
+                    <span class="material-icons-outlined" style="font-size: 5rem; color: #888;">tablet_android</span>
+                </div>
+                <h2 class="card-title">Kindle eBook</h2>
+                <p class="card-text">
+                    Publish <a href="#">digitally to Stories hub</a> and other hand-held devices. Includes comics and
+                    manga.
+                </p>
+                <a class="btn-selection" href="ebook_details.html"
+                    style="text-decoration: none; display: inline-block;">Create eBook</a>
+            </div>
+
+            <div class="selection-card">
+                <div class="card-icon-box">
+                    <span class="material-icons-outlined" style="font-size: 5rem; color: #888;">menu_book</span>
+                </div>
+                <h2 class="card-title">Paperback</h2>
+                <p class="card-text">
+                    Make your <a href="#">title available in print</a> and ship around the world.
+                </p>
+                <a class="btn-selection" href="create_paperback.html"
+                    style="text-decoration: none; display: inline-block;">Create paperback</a>
+            </div>
+
+            <div class="selection-card">
+                <div class="card-icon-box">
+                    <span class="material-icons-outlined" style="font-size: 5rem; color: #888;">auto_stories</span>
+                </div>
+                <h2 class="card-title">Hardcover</h2>
+                <p class="card-text">
+                    Bind your <a href="#">book in hardcover</a> and ship around the world.
+                </p>
+                <a class="btn-selection" href="create_hardcover.html"
+                    style="text-decoration: none; display: inline-block;">Create hardcover</a>
+            </div>
+
+            <div class="selection-card">
+                <div class="card-icon-box">
+                    <span class="material-icons-outlined" style="font-size: 5rem; color: #888;">library_books</span>
+                </div>
+                <h2 class="card-title">Series page</h2>
+                <p class="card-text">
+                    Collect your books together and build a single, <a href="#">Stories hub Series page</a>.
+                </p>
+                <button class="btn-selection">Create series page</button>
+            </div>
+        </div>
+
+        <div class="pro-tip">
+            <span class="material-icons-outlined pro-tip-icon">lightbulb</span>
+            <div>
+                <b>Pro Tip:</b> After submitting your book, it can take up to 72 hours to appear on stories-hub.com and
+                up to 5 days for the remaining Stories hub country websites. <a href="#">View other timelines.</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="promo-section">
+        <div class="promo-container">
+            <div style="display: flex; align-items: center;">
+                <div class="kdp-badge">storieshubselect</div>
+                <div class="promo-text">
+                    Make more money and reach more readers<br>
+                    through Stories hub Unlimited. <a href="#">Learn More</a>
+                </div>
+            </div>
+            <div class="author-earnings">
+                <div class="earnings-label">Total Stories hub Select Author Earnings</div>
+                <div class="earnings-value">December 2025 • $64.9 Million</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-amazon">
+                <div class="brand-name-orange" style="color: #555;">stories hub</div>
+                <div class="brand-divider" style="height: 35px;"></div>
+                <div class="brand-subtext" style="font-size: 0.9rem;">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><span class="material-icons-outlined">facebook</span> Facebook</a>
+                <a href="#" style="color: #000;"><span
+                        style="background: black; color: white; padding: 1px 4px; border-radius: 2px;">X</span> X</a>
+                <a href="#" style="color: #E1306C;"><span class="material-icons-outlined">camera_alt</span>
+                    Instagram</a>
+            </div>
+        </div>
+
+        <div class="footer-services">
+            <div>
+                <div class="service-title">Stories hub Select</div>
+                <div class="service-desc">Earn more money and reach new readers</div>
+            </div>
+            <div>
+                <div class="service-title">Community</div>
+                <div class="service-desc">Connect with experts and fellow authors</div>
+            </div>
+            <div>
+                <div class="service-title">CreativeHub</div>
+                <div class="service-desc">Indie print publishing made easy</div>
+            </div>
+            <div>
+                <div class="service-title">Studio</div>
+                <div class="service-desc">Indie audiobook publishing made easy</div>
+            </div>
+        </div>
+
+        <div class="footer-bottom-links">
+            <a href="#">Stories hub Terms and Conditions</a>
+            <a href="#">Privacy Notice</a>
+            <a href="#">Conditions of Use</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Join Our Team</a>
+            <a href="#">stories-hub.com.jp</a>
+        </div>
+        <p class="copyright-text">
+            © 1996-2026, Stories hub Publishing, Inc. or its affiliates. All Rights Reserved.<br>
+            Stories hub and its logo are trademarks of Stories hub Publishing, Inc. or its affiliates.
+        </p>
+    </footer>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="document.body.classList.toggle('dark')">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+</body>
+
+</html>

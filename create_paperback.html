@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Create Paperback | Stories Hub</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/create-book.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="bookshelf-nav-secondary">
+        <div class="notification-bell">
+            <span class="material-icons" style="font-size: 18px;">notifications</span>
+            <span class="badge">3</span>
+        </div>
+        <a href="author_profile.html" style="font-weight: 700; color: #6366f1;">
+            <span class="material-icons" style="font-size: 16px;">visibility</span>
+            <span data-i18n="viewPublicProfile">View Public Profile</span>
+        </a>
+        <div class="nav-divider-small"></div>
+        <div class="language-selector" style="position: relative;">
+            <button class="bg-transparent border-0 cursor-pointer p-0 text-link" onclick="toggleLanguageDropdown()"
+                style="display: flex; align-items: center; gap: 4px;">
+                <span id="current-language">English</span>
+                <span class="material-icons" style="font-size: 10px;">expand_more</span>
+            </button>
+            <div id="language-dropdown" class="notif-dropdown" style="display: none; min-width: 150px;">
+                <div class="notif-header">Select Language</div>
+                <div class="notif-item" onclick="selectLanguage('en')" style="cursor: pointer;">🇬🇧 English</div>
+                <div class="notif-item" onclick="selectLanguage('es')" style="cursor: pointer;">🇪🇸 Español</div>
+                <div class="notif-item" onclick="selectLanguage('fr')" style="cursor: pointer;">🇫🇷 Français</div>
+                <div class="notif-item" onclick="selectLanguage('de')" style="cursor: pointer;">🇩🇪 Deutsch</div>
+                <div class="notif-item" onclick="selectLanguage('hi')" style="cursor: pointer;">🇮🇳 हिन्दी</div>
+                <div class="notif-item" onclick="selectLanguage('te')" style="cursor: pointer;">🇮🇳 తెలుగు</div>
+            </div>
+        </div>
+        <div class="nav-divider-small"></div>
+        <a href="help_center.html" data-i18n="help">Help</a>
+        <div class="nav-divider-small"></div>
+        <a href="index.html" data-i18n="signOut">Sign out</a>
+    </nav>
+
+    <header class="bookshelf-header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext-stack">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav-links">
+                <a href="bookshelf.html" data-i18n="bookshelf">Bookshelf</a>
+                <a href="reports.html" data-i18n="reports">Reports</a>
+                <a href="community_forum.html" data-i18n="community">Community</a>
+                <a href="marketing.html" data-i18n="marketing">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="create-book-container">
+        <div class="progress-bar">
+            <div class="progress-step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Format</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Content</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-number">4</div>
+                <div class="step-label">Pricing</div>
+            </div>
+        </div>
+
+        <div class="create-hero">
+            <h1>Create Your Paperback</h1>
+            <p>Bring your story to life in print. Reach readers who love the feel of a physical book.</p>
+        </div>
+
+        <div class="form-card">
+            <h2>Paperback Specifications</h2>
+
+            <div class="form-section">
+                <h3>Book Title</h3>
+                <input type="text" class="form-input" placeholder="Enter your book title" id="book-title" />
+            </div>
+
+            <div class="form-section">
+                <h3>Subtitle (Optional)</h3>
+                <input type="text" class="form-input" placeholder="Add a subtitle" id="book-subtitle" />
+            </div>
+
+            <div class="form-section">
+                <h3>Trim Size</h3>
+                <p class="form-help">Select the physical dimensions of your book</p>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="5x8" checked />
+                        <div class="option-content">
+                            <span class="material-icons">book</span>
+                            <div class="option-title">5" x 8"</div>
+                            <div class="option-desc">Standard Fiction</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="6x9" />
+                        <div class="option-content">
+                            <span class="material-icons">menu_book</span>
+                            <div class="option-title">6" x 9"</div>
+                            <div class="option-desc">Non-Fiction</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="trim-size" value="8.5x11" />
+                        <div class="option-content">
+                            <span class="material-icons">auto_stories</span>
+                            <div class="option-title">8.5" x 11"</div>
+                            <div class="option-desc">Textbook/Manual</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Interior Type</h3>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="interior" value="bw" checked />
+                        <div class="option-content">
+                            <span class="material-icons">text_fields</span>
+                            <div class="option-title">Black & White</div>
+                            <div class="option-desc">Standard text</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="interior" value="color" />
+                        <div class="option-content">
+                            <span class="material-icons">palette</span>
+                            <div class="option-title">Full Color</div>
+                            <div class="option-desc">Premium quality</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Paper Type</h3>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="paper" value="white" checked />
+                        <div class="option-content">
+                            <span class="material-icons">description</span>
+                            <div class="option-title">White Paper</div>
+                            <div class="option-desc">Bright, crisp pages</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="paper" value="cream" />
+                        <div class="option-content">
+                            <span class="material-icons">article</span>
+                            <div class="option-title">Cream Paper</div>
+                            <div class="option-desc">Easy on the eyes</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Bleed Settings</h3>
+                <p class="form-help">Does your book have images or backgrounds that extend to the edge?</p>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="bleed" value="no-bleed" checked />
+                        <div class="option-content">
+                            <span class="material-icons">crop_free</span>
+                            <div class="option-title">No Bleed</div>
+                            <div class="option-desc">Text only</div>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="bleed" value="bleed" />
+                        <div class="option-content">
+                            <span class="material-icons">photo_size_select_large</span>
+                            <div class="option-title">With Bleed</div>
+                            <div class="option-desc">Full-page images</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Estimated Page Count</h3>
+                <input type="number" class="form-input" placeholder="Enter page count (24-828 pages)" min="24" max="828"
+                    id="page-count" />
+                <p class="form-help">This affects printing costs and spine width</p>
+            </div>
+
+            <div class="info-card">
+                <span class="material-icons">info</span>
+                <div>
+                    <strong>Printing Costs:</strong> Paperback printing costs are calculated based on page count, trim
+                    size, and interior type. You'll see the exact costs before publishing.
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-secondary" onclick="window.location.href='bookshelf.html'">
+                <span class="material-icons">arrow_back</span>
+                Cancel
+            </button>
+            <button class="btn-primary" onclick="window.location.href='ebook_details.html'">
+                Continue to Details
+                <span class="material-icons">arrow_forward</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        // Save form data to localStorage
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => {
+                const formData = {
+                    title: document.getElementById('book-title').value,
+                    subtitle: document.getElementById('book-subtitle').value,
+                    trimSize: document.querySelector('input[name="trim-size"]:checked').value,
+                    interior: document.querySelector('input[name="interior"]:checked').value,
+                    paper: document.querySelector('input[name="paper"]:checked').value,
+                    bleed: document.querySelector('input[name="bleed"]:checked').value,
+                    pageCount: document.getElementById('page-count').value
+                };
+                localStorage.setItem('paperback-specs', JSON.stringify(formData));
+            });
+        });
+
+        // Load saved data
+        const savedData = localStorage.getItem('paperback-specs');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            if (data.title) document.getElementById('book-title').value = data.title;
+            if (data.subtitle) document.getElementById('book-subtitle').value = data.subtitle;
+            if (data.pageCount) document.getElementById('page-count').value = data.pageCount;
+        }
+    </script>
+</body>
+
+</html>

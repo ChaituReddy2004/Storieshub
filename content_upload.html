@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stories hub Publishing | eBook Content</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&family=Noto+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Nav Secondary */
+        .nav-secondary {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0.5rem 2rem;
+            background-color: #fff;
+            font-size: 0.75rem;
+            color: #565959;
+            gap: 0.5rem;
+        }
+
+        .nav-secondary a,
+        .nav-secondary button {
+            color: #007185;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .nav-divider-v {
+            width: 1px;
+            height: 12px;
+            background-color: #ccc;
+            margin: 0 0.25rem;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #d5d9d9;
+            padding: 1rem 2rem;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-name-orange {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+
+        .brand-divider {
+            height: 35px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 0.75rem;
+        }
+
+        .brand-subtext {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-subtext span {
+            font-size: 1.1rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .main-nav a {
+            color: #007185;
+            text-decoration: none;
+            padding-bottom: 4px;
+        }
+
+        .main-nav a.active {
+            color: #111;
+            border-bottom: 2px solid #c45500;
+        }
+
+        /* Main Container */
+        .main-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Tabs */
+        .form-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-item {
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #ddd;
+        }
+
+        .tab-item.active {
+            border-top-color: #FF9900;
+        }
+
+        .tab-item.complete {
+            border-top-color: #007600;
+        }
+
+        .tab-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .tab-status {
+            font-size: 0.75rem;
+            color: #007185;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tab-status.complete {
+            color: #007600;
+        }
+
+        .tab-status.not-started {
+            color: #767676;
+        }
+
+        /* Form Sections */
+        .form-card {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            padding: 2rem;
+            border-bottom: 1px solid #d5d9d9;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .field-desc {
+            font-size: 0.8125rem;
+            color: #565959;
+            line-height: 1.5;
+        }
+
+        .field-desc a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .btn-primary-action {
+            background-color: #FFD814;
+            background: linear-gradient(to bottom, #F7DF61, #EFC100);
+            border: 1px solid #a88734;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #111;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+            width: fit-content;
+        }
+
+        /* Cover Section */
+        .cover-box {
+            border: 1px solid #d5d9d9;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .cover-option {
+            padding: 1.5rem;
+            border-bottom: 1px solid #d5d9d9;
+        }
+
+        .cover-option:last-child {
+            border-bottom: none;
+        }
+
+        .label-with-radio {
+            display: flex;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .option-content {
+            flex-grow: 1;
+        }
+
+        .option-title {
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .cover-preview {
+            width: 100px;
+            height: 140px;
+            border: 2px dashed #ccc;
+            background-color: #f7fafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.625rem;
+            color: #767676;
+            margin-bottom: 1rem;
+        }
+
+        /* Preview Banner */
+        .preview-alert {
+            background-color: #E7F4F9;
+            border: 1px solid #007185;
+            padding: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            font-size: 0.875rem;
+            border-radius: 4px;
+        }
+
+        /* Bottom Actions */
+        .form-actions {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-outline {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            padding: 0.5rem 2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom, #F7DF61, #EFC100);
+            border: 1px solid #a88734;
+            padding: 0.5rem 2.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        }
+
+        .dark body {
+            background-color: #0F1111;
+            color: #E6E6E6;
+        }
+
+        .dark .header,
+        .dark .nav-secondary,
+        .dark .tab-item,
+        .dark .form-card {
+            background-color: #1A1D1D;
+            border-color: #3A3D3D;
+        }
+
+        .dark .form-section {
+            border-color: #3A3D3D;
+        }
+
+        .dark .section-label,
+        .dark .tab-title {
+            color: #fff;
+        }
+
+        .dark .cover-box {
+            border-color: #3A3D3D;
+        }
+
+        .dark .cover-option {
+            border-color: #3A3D3D;
+        }
+
+        .dark .preview-alert {
+            background-color: #1c2b33;
+            border-color: #007185;
+        }
+
+        .dark .btn-outline {
+            background-color: #3A3D3D;
+            color: #fff;
+            border-color: #4b5563;
+        }
+    </style>
+</head>
+
+<body class="dark:bg-slate-900">
+    <nav class="nav-secondary">
+        <a href="#">Your Account</a>
+        <div class="nav-divider-v"></div>
+        <button class="text-link">English <span class="material-icons"
+                style="font-size: 10px;">expand_more</span></button>
+        <div class="nav-divider-v"></div>
+        <a href="#">Help</a>
+        <div class="nav-divider-v"></div>
+        <a href="index.html">Sign out</a>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <a class="brand-logo" href="bookshelf.html">
+                <div class="brand-name-orange">stories hub</div>
+                <div class="brand-divider"></div>
+                <div class="brand-subtext">
+                    <span>direct</span>
+                    <span>publishing</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a class="active" href="bookshelf.html">Bookshelf</a>
+                <a href="reports.html">Reports</a>
+                <a href="community_forum.html">Community</a>
+                <a href="marketing.html">Marketing</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="form-tabs">
+            <div class="tab-item complete">
+                <div class="tab-title">eBook Details</div>
+                <div class="tab-status complete">
+                    <span class="material-icons" style="font-size: 14px;">check_circle</span> Complete
+                </div>
+            </div>
+            <div class="tab-item active">
+                <div class="tab-title">eBook Content</div>
+                <div class="tab-status">
+                    <span class="material-icons" style="font-size: 14px;">info</span> In progress...
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-title">eBook Pricing</div>
+                <div class="tab-status not-started">
+                    <span class="material-icons" style="font-size: 14px;">info</span> Not started
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <!-- Manuscript -->
+            <div class="form-section">
+                <div class="section-label">Manuscript</div>
+                <div class="field-group">
+                    <p class="field-desc">Upload your manuscript (i.e. your book's interior content). We recommend using
+                        a KPF or EPUB file. <a href="#">See all supported file types</a></p>
+                    <button class="btn-primary-action">Upload manuscript</button>
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                        <p class="field-desc">Digital Rights Management (DRM) protects the rights of copyright holders.
+                            <a href="#">Learn more</a>
+                        </p>
+                        <p style="font-size: 0.8125rem; font-weight: 700; margin-top: 0.5rem;">Would you like to apply
+                            Digital Rights Management (DRM) to your files?</p>
+                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label class="label-with-radio">
+                                <input name="drm" type="radio" />
+                                <span style="font-size: 0.8125rem;">Yes, apply Digital Rights Management</span>
+                            </label>
+                            <label class="label-with-radio">
+                                <input checked name="drm" type="radio" />
+                                <span style="font-size: 0.8125rem;">No, allow customers to download it as a PDF or EPUB
+                                    file</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cover -->
+            <div class="form-section">
+                <div class="section-label">eBook Cover</div>
+                <div class="field-group">
+                    <p class="field-desc">Upload a front cover for your book or use our <a href="#">Cover Creator</a> to
+                        design one today. <a href="#">Required cover specifications</a></p>
+
+                    <div class="cover-box">
+                        <div class="cover-option">
+                            <label class="label-with-radio">
+                                <input checked name="cover_type" type="radio" />
+                                <div class="option-content">
+                                    <div class="option-title">Use Cover Creator to make your book cover</div>
+                                    <div style="display: flex; gap: 1.5rem; align-items: flex-end;">
+                                        <div class="cover-preview">No Cover Uploaded</div>
+                                        <button class="btn-primary-action">Launch Cover Creator</button>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="cover-option">
+                            <label class="label-with-radio">
+                                <input name="cover_type" type="radio" />
+                                <div class="option-content">
+                                    <div class="option-title" style="margin-bottom: 0;">Upload a cover you already have
+                                        (JPG/TIFF only)</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Content -->
+            <div class="form-section">
+                <div class="section-label">AI-Generated Content</div>
+                <div class="field-group">
+                    <p class="field-desc">Stories hub is collecting information about the use of Artificial Intelligence
+                        (AI) tools in creating content. <a href="#">What is AI-generated content?</a></p>
+                    <p style="font-size: 0.8125rem; font-weight: 700;">Did you use AI tools in creating texts, images,
+                        and/or translations in your book?</p>
+                    <div
+                        style="display: flex; flex-direction: column; border: 1px solid #d5d9d9; border-radius: 4px; overflow: hidden; width: fit-content; min-width: 200px;">
+                        <label class="label-with-radio"
+                            style="padding: 0.75rem; background-color: #f7fafa; border-bottom: 1px solid #d5d9d9;">
+                            <input name="ai_use" type="radio" />
+                            <span style="font-size: 0.8125rem;">Yes</span>
+                        </label>
+                        <label class="label-with-radio" style="padding: 0.75rem;">
+                            <input checked name="ai_use" type="radio" />
+                            <span style="font-size: 0.8125rem;">No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="form-section">
+                <div class="section-label">eBook Preview</div>
+                <div class="field-group">
+                    <p style="font-size: 0.875rem; font-weight: 700;">Online Preview and Quality Check</p>
+                    <p class="field-desc">Preview your book online to check for quality issues. TIP: Use our <a
+                            href="#">Previewer</a> to check interactive features.</p>
+                    <button class="btn-outline" disabled
+                        style="width: auto; padding: 6px 20px; border-radius: 4px; color: #767676; cursor: not-allowed;">Launch
+                        Previewer</button>
+
+                    <div class="preview-alert" style="margin-top: 1rem;">
+                        <span class="material-icons" style="color: #007185;">info</span>
+                        <span style="font-weight: 700; color: #111;">Your book cannot be previewed until a manuscript is
+                            uploaded.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISBN -->
+            <div class="form-section">
+                <div class="section-label">eBook ISBN</div>
+                <div class="field-group">
+                    <div>
+                        <p style="font-size: 0.8125rem; font-weight: 700;">ISBN (Optional)</p>
+                        <p class="field-desc" style="font-size: 0.75rem;">Kindle eBooks are not required to have an
+                            ISBN. <a href="#">What is an ISBN?</a></p>
+                        <input class="form-input" style="max-width: 300px; margin-top: 0.5rem;" type="text" />
+                    </div>
+                    <div>
+                        <p style="font-size: 0.8125rem; font-weight: 700;">Publisher (Optional)</p>
+                        <input class="form-input" style="max-width: 300px; margin-top: 0.5rem;" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-outline" onclick="window.location.href='ebook_details.html'">&lt; Back to
+                Details</button>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-outline">Save as Draft</button>
+                <div style="text-align: center;">
+                    <button class="btn-primary" onclick="window.location.href='ebook_pricing.html'">Save and
+                        Continue</button>
+                    <p style="font-size: 0.625rem; color: #565959; margin-top: 4px;">Next step: Pricing</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle">
+        <button class="toggle-btn" onclick="document.body.classList.toggle('dark')">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </div>
+</body>
+
+</html>
